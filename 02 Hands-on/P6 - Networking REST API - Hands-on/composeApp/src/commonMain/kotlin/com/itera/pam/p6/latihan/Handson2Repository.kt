@@ -37,12 +37,13 @@ class UserListStateHolder(
     val state: StateFlow<UiState> = _state.asStateFlow()
 
     suspend fun load() {
-        // TODO 1: set _state.value ke UiState.Loading sebelum mulai fetch
-        // TODO 2: panggil repository.getUsers() di dalam try-catch
-        // TODO 3: jika berhasil, set _state.value ke UiState.Success(users)
-        // TODO 4: jika gagal (catch Exception e), set _state.value ke
-        //         UiState.Error(e.message ?: "Terjadi kesalahan")
-        TODO("Lengkapi load(): Loading -> try fetch -> Success/Error")
+        _state.value = UiState.Loading
+        try {
+            val users = repository.getUsers()
+            _state.value = UiState.Success(users)
+        } catch (e: Exception) {
+            _state.value = UiState.Error(e.message ?: "Terjadi kesalahan")
+        }
     }
 }
 

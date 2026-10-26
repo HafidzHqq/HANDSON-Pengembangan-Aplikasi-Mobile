@@ -32,7 +32,11 @@ fun LabeledTextField(
     value: String,
     onValueChange: (String) -> Unit
 ) {
-    // TODO: Implement dengan OutlinedTextField(value = value, onValueChange = onValueChange, label = { Text(label) })
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) }
+    )
 }
 
 // Parent yang menyimpan state
@@ -49,7 +53,11 @@ fun Handson2Screen() {
             value = name,
             onValueChange = { name = it }
         )
-        // TODO: Tambahkan email field pakai LabeledTextField yang sama, hoisted ke `email`
-        // TODO: Tampilkan preview data, misal: Text("Hello, $name! Email: $email")
+        LabeledTextField(
+            label = "Email",
+            value = email,
+            onValueChange = { email = it }
+        )
+        Text("Hello, $name! Email: $email")
     }
 }

@@ -33,14 +33,16 @@ data class RemoteUser(
 //                 json(Json { ignoreUnknownKeys = true })
 //             }
 //         }
-val client: HttpClient = TODO("Buat HttpClient dengan plugin ContentNegotiation + json()")
+val client: HttpClient = HttpClient {
+    install(ContentNegotiation) {
+        json(Json { ignoreUnknownKeys = true })
+    }
+}
 
 // TODO 2: Lakukan GET request ke "https://jsonplaceholder.typicode.com/users"
 //         dan decode response body-nya menjadi List<RemoteUser>.
 suspend fun fetchUsers(): List<RemoteUser> {
-    // Kode kamu di sini...
-    // return client.get("https://jsonplaceholder.typicode.com/users").body()
-    TODO("Panggil client.get(...) lalu .body<List<RemoteUser>>()")
+    return client.get("https://jsonplaceholder.typicode.com/users").body()
 }
 
 @Composable
